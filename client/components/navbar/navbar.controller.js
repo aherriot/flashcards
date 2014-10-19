@@ -5,6 +5,9 @@ angular.module('flashcardsApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    }, {
+      'title': 'Words',
+      'link': '/words'
     }];
 
     $scope.isCollapsed = true;
