@@ -2,10 +2,58 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-md-12 table-col">
+      <h1>Words</h1>
+    </div>
+  </div>
 
+  <div class="row">
     <div class="col-md-12">
-      This is the words view.
+      <div class="form-group form-inline">
+        <button type="button" ng-click="addWord()" class="btn btn-primary">Add Word</button>
+        <input type="text" class="form-control" ng-model="filterText" placeholder="Search...">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3 table-col persian">
+      <b>Persian</b>
+    </div>
+
+    <div class="col-sm-3 table-col">
+      <b>English</b>
+    </div>
+
+    <div class="col-sm-3 table-col">
+      <b>Phonetic</b>
+    </div>
+
+    <div class="col-sm-2 table-col">
+      <b>Tags</b>
     </div>
 
   </div>
+
+  <div class="row table-row" ng-repeat="word in filteredWords  = (words | filter:filterText)">
+    <inline-edit data="word"></inline-edit>
+  </div>
+
+  <div class="row table-row" ng-show="filteredWords.length == 0 && filterText.length">
+    <div class="text-center">
+      There are no words that match your query.
+    </div>
+  </div>
+
+  <div class="row table-row" ng-show="filteredWords.length == 0 && filterText.length == 0">
+    <div class="text-center">
+      Please add words for them to appear here.
+    </div>
+  </div>
+
+  <!-- <div class="row" ng-repeat="word in words">
+    {{word.english}} | {{word.persian}} | {{word.phonetic}}
+  </div> -->
+
 </div>

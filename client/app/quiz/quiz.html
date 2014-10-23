@@ -1,0 +1,116 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<button class="btn btn-default">
+			  <span class="glyphicon glyphicon-align-justify"></span>&nbsp; Quiz Options
+			</button>
+			{{bucket}} {{direction()}}
+			<br>
+			<div class="form-group form-inline">
+				<input type="text" class="form-control"
+					ng-model="tagFilter" ng-change="filterChanged()"
+					placeholder="Enter tag to filter">
+			</div>
+
+			<br>
+			<div class="btn-group">
+	        <label 	class="btn btn-default"
+						ng-model="fromLang"
+						ng-change="fromLangChanged()"
+						btn-radio="'e'" uncheckable>English</label>
+
+	        <label class="btn btn-default"
+						ng-model="fromLang"
+						ng-change="fromLangChanged()"
+						btn-radio="'p'" uncheckable>Persian</label>
+
+	        <label class="btn btn-default"
+						ng-model="fromLang"
+						ng-change="fromLangChanged()"
+						btn-radio="'ph'" uncheckable>Phonetic</label>
+	    </div>
+			<br>
+			<div class="btn-group">
+					<label class="btn btn-default"
+	 					ng-model="toLang"
+						ng-change="toLangChanged()"
+						btn-radio="'e'" uncheckable>English</label>
+
+					<label class="btn btn-default"
+						ng-model="toLang"
+						ng-change="toLangChanged()"
+						btn-radio="'p'" uncheckable>Persian</label>
+
+					<label class="btn btn-default"
+						ng-model="toLang"
+						ng-change="toLangChanged()"
+						btn-radio="'ph'" uncheckable>Phonetic</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<button class="btn btn-primary" ng-click="bucket=1">
+				<span class="glyphicon glyphicon-share-alt"></span>&nbsp; Restart
+			</button>
+		</div>
+	</div>
+
+	<br>
+
+	<div ng-hide="noWords">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h2 class="panel-title">Question</h2>
+					</div>
+					<div class="panel-body">
+						<p>
+							{{question}}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" ng-hide="hideAnswer">
+			<div class="col-md-6 col-md-offset-3">
+				<div id="answerDiv" class="panel panel-primary">
+					<div class="panel-heading">
+						<h2 class="panel-title">Answer</h2>
+					</div>
+					<div class="panel-body">
+					  <p>
+					    {{answer}}
+					  </p>
+					 </div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<button class="btn btn-primary" ng-show="hideAnswer"
+					ng-click="reveal()">Reveal</button>
+				<button class="btn btn-success" ng-hide="hideAnswer"
+					ng-click="correct()">Correct</button>
+				<button class="btn btn-danger" ng-hide="hideAnswer"
+					ng-click="wrong()">Wrong</button>
+
+				<button class="btn" ng-hide="hideAnswer">
+					<span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit Word
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="noWords">
+		<div class="col-md-12 text-center">
+			No words match filter. Please either add new words or change the filter.
+		</div>
+	</div>
+</div>

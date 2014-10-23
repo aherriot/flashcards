@@ -8,6 +8,15 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  * App-wide Styles
  */
 
+
+$progress1: #b80000;
+$progress2: #de9000;
+$progress3: #f0d000;
+$progress4: #a2ab00;
+$progress5: #068000;
+
+$hover-background: #ffff99;
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -15,11 +24,59 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
+.persian {
+  direction: rtl;
+}
+
+.inactive {
+    border: none;
+    background-color: #fff;
+}
+
+.row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.row .table-col {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.table-row {
+
+  border-top: 1px solid #ccc;
+
+  &:hover {
+    background-color: $hover-background;
+
+    input {
+      background-color: $hover-background;
+    }
+  }
+}
+
+//flip an image horizontally
+.icon-flipped {
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+}
+
+//prevent line breaks
+.no-wrap {
+  white-space: nowrap;
+}
+
+
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import 'quiz/quiz.scss';
 @import 'words/words.scss';
 @import 'modal/modal.scss';
 // endinjector

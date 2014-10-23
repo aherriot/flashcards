@@ -15,7 +15,8 @@ angular.module('flashcardsApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $location.path('/words');
+
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

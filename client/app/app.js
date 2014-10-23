@@ -8,11 +8,7 @@ angular.module('flashcardsApp', [
   'ui.bootstrap'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
-    $routeProvider.
-      when('/words', {
-        templateUrl: '/app/words/words.html',
-        controller: 'WordCtrl'
-      })
+    $routeProvider
       .otherwise({
         redirectTo: '/'
       });
