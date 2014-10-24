@@ -4,54 +4,62 @@ angular.module('flashcardsApp')
   .controller('QuizCtrl', ['$scope', '$filter', 'Word', 'Auth',
     function ($scope, $filter, Word, Auth) {
 
+    //The word currently being quized.
     $scope.word = null;
 
+    //whether the answer is shown yet.
     $scope.hideAnswer = true;
 
-    //start a bucket 1
+    //The bucket to look for cards in.
     $scope.bucket = 1;
 
-    $scope.fromLang = 'e';
-    $scope.toLang = 'p';
+    $scope.bucketCounts = [0,0,0,0,0];
+
+    //The default question and answer direction (Persian -> English)
+    $scope.fromLang = 'p';
+    $scope.toLang = 'e';
     //Which pair and direction are we quizing for
     //between [english, persian, and phonetic persian]
     $scope.direction = function() {
       return $scope.fromLang + '_to_' + $scope.toLang;
     }
 
+    //The filtering string to filter our word list with
     $scope.tagFilter = "";
 
-
+    //fetch the words from the server.
+    //TODO: share scope or at least this data with Words controller.
     $scope.words = Word.query({user_id: Auth.getCurrentUser()._id},
       function(words) {
         selectWord();
     });
 
+    //show the answer
     $scope.reveal = function() {
       $scope.hideAnswer = false;
     };
 
+    //The response was correct, so we move the word up one bucket.
     $scope.correct = function() {
       $scope.hideAnswer = true;
       $scope.word[$scope.direction()] = Math.min($scope.word[$scope.direction()]+1, 5);
-      console.log($scope.word.english  + ': ' + $scope.word[$scope.direction()]);
-
       Word.update({id: $scope.word._id}, $scope.word, function() {
         selectWord();
       });
 
     };
 
+    //the response was incorrect, so we move this word back to the first bucket
     $scope.wrong = function() {
       $scope.hideAnswer = true;
-      $scope.word[$scope.direction()] = Math.max($scope.word[$scope.direction()]-1, 1);
-      console.log($scope.word.english  + ': ' + $scope.word[$scope.direction()]);
+      $scope.word[$scope.direction()] = 1;
       Word.update({id: $scope.word._id}, $scope.word,function() {
         selectWord();
       });
 
     };
 
+    //select which word to use next
     function selectWord() {
 
       if($scope.words.length === 0) {
@@ -59,15 +67,16 @@ angular.module('flashcardsApp')
         return;
       }
 
-
       var filteredWordList = [];
       while(true) {
-
+        $scope.bucketCounts = [0,0,0,0,0];
         filteredWordList = $filter('filter')($scope.words, function(word, index) {
           //keep any words that are in the current bucket or smaller
+          var wordBucket = word[$scope.direction()];
 
+          $scope.bucketCounts[wordBucket-1]++;
           //word is in too large of a bucket
-          if(word[$scope.direction()] > $scope.bucket) {
+          if(wordBucket > $scope.bucket) {
             return false;
           }
 
@@ -86,6 +95,13 @@ angular.module('flashcardsApp')
           //otherwise it is not to be displayed.
           return false;
         });
+        var total = 0;
+        for(var i = 0; i < 5; i++) {
+          total += $scope.bucketCounts[i];
+        }
+        for(var i = 0; i < 5; i++) {
+          $scope.bucketCounts[i] = ($scope.bucketCounts[i] / total) * 100;
+        }
 
         $scope.noWords = false;
         //if this bucket is empty:

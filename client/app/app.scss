@@ -9,11 +9,11 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  */
 
 
-$progress1: #b80000;
-$progress2: #de9000;
-$progress3: #f0d000;
-$progress4: #a2ab00;
-$progress5: #068000;
+$bucket1: #e51c23;
+$bucket2: #ff5722;
+$bucket3: #ffc107;
+$bucket4: #cddc39;
+$bucket5: #259b24;
 
 $hover-background: #ffff99;
 
@@ -69,6 +69,13 @@ $hover-background: #ffff99;
   white-space: nowrap;
 }
 
+.progress .progress-bar {
+  &:nth-child(1) {background-color: $bucket1;}
+  &:nth-child(2) {background-color: $bucket2;}
+  &:nth-child(3) {background-color: $bucket3;}
+  &:nth-child(4) {background-color: $bucket4;}
+  &:nth-child(5) {background-color: $bucket5;}
+}
 
 
 // Component styles are injected through grunt
