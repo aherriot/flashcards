@@ -8,6 +8,9 @@ angular.module('flashcardsApp')
     }, {
       'title': 'Quiz',
       'link': '/quiz'
+    }, {
+      'title': 'About',
+      'link': '/about'
     }];
 
     $scope.isCollapsed = true;

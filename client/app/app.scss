@@ -80,6 +80,7 @@ $hover-background: #ffff99;
 
 // Component styles are injected through grunt
 // injector
+@import 'about/about.scss';
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
