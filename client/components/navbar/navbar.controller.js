@@ -3,9 +3,6 @@
 angular.module('flashcardsApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }, {
       'title': 'Words',
       'link': '/words'
     }, {
