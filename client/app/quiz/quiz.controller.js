@@ -87,7 +87,6 @@ angular.module('flashcardsApp')
 
           //if the tag filter text is a substring of any of the tags.
           for(var index in word.tags) {
-            // console.log(tag + ' ' + $scope.tagFilter);
             if(word.tags[index].indexOf($scope.tagFilter) >= 0) {
               return true;
             }
@@ -127,8 +126,6 @@ angular.module('flashcardsApp')
     }
 
     $scope.fromLangChanged = function(value) {
-      console.log('fromLangChanged:' + value);
-
       if($scope.fromLang === $scope.toLang) {
         if($scope.fromLang === 'p')
           $scope.toLang = 'e';
@@ -146,7 +143,6 @@ angular.module('flashcardsApp')
     };
 
     $scope.toLangChanged = function(value) {
-      console.log('toLangChanged:' + value);
 
       if($scope.fromLang === $scope.toLang) {
         if($scope.toLang === 'p')

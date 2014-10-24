@@ -4,59 +4,70 @@
 
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<button class="btn btn-default">
+			<button class="btn btn-default"
+					ng-model="showOptions"
+					ng-click="showOptions= !showOptions">
 			  <span class="glyphicon glyphicon-align-justify"></span>&nbsp; Quiz Options
 			</button>
-			{{bucket}} {{direction()}}
-			<br>
-			<div class="form-group form-inline">
-				<input type="text" class="form-control"
-					ng-model="tagFilter" ng-change="filterChanged()"
-					placeholder="Enter tag to filter">
+			<div ng-show="showOptions" class="panel panel-default">
+				<div class="panel-body">
+
+					<div class="form-group">
+						<label for="optionTagFilter">Tag</label>
+						<div class="form-group form-inline">
+							<input id="optionTagFilter" type="text" class="form-control"
+								ng-model="tagFilter" ng-change="filterChanged()"
+								placeholder="Enter tag to filter">
+						</div>
+					</div>
+
+ 					<div class="form-group">
+    				<label for="optionFromLanguage">Quiz Language</label><br>
+						<div id="optionFromLanguage" class="btn-group">
+								<label 	class="btn btn-default"
+									ng-model="fromLang"
+									ng-change="fromLangChanged()"
+									btn-radio="'e'" uncheckable>English</label>
+
+								<label class="btn btn-default"
+									ng-model="fromLang"
+									ng-change="fromLangChanged()"
+									btn-radio="'p'" uncheckable>Persian</label>
+
+								<label class="btn btn-default"
+									ng-model="fromLang"
+									ng-change="fromLangChanged()"
+									btn-radio="'ph'" uncheckable>Phonetic</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="optionToLanguage">Answer Language</label><br>
+						<div id="optionToLanguage" class="btn-group">
+								<label class="btn btn-default"
+									ng-model="toLang"
+									ng-change="toLangChanged()"
+									btn-radio="'e'" uncheckable>English</label>
+
+								<label class="btn btn-default"
+									ng-model="toLang"
+									ng-change="toLangChanged()"
+									btn-radio="'p'" uncheckable>Persian</label>
+
+								<label class="btn btn-default"
+									ng-model="toLang"
+									ng-change="toLangChanged()"
+									btn-radio="'ph'" uncheckable>Phonetic</label>
+						</div>
+					</div>
+
+							<button class="btn btn-primary" ng-click="bucket=1">
+								<span class="glyphicon glyphicon-share-alt"></span>&nbsp; Restart
+							</button>
+				</div>
+
 			</div>
 
-			<br>
-			<div class="btn-group">
-	        <label 	class="btn btn-default"
-						ng-model="fromLang"
-						ng-change="fromLangChanged()"
-						btn-radio="'e'" uncheckable>English</label>
-
-	        <label class="btn btn-default"
-						ng-model="fromLang"
-						ng-change="fromLangChanged()"
-						btn-radio="'p'" uncheckable>Persian</label>
-
-	        <label class="btn btn-default"
-						ng-model="fromLang"
-						ng-change="fromLangChanged()"
-						btn-radio="'ph'" uncheckable>Phonetic</label>
-	    </div>
-			<br>
-			<div class="btn-group">
-					<label class="btn btn-default"
-	 					ng-model="toLang"
-						ng-change="toLangChanged()"
-						btn-radio="'e'" uncheckable>English</label>
-
-					<label class="btn btn-default"
-						ng-model="toLang"
-						ng-change="toLangChanged()"
-						btn-radio="'p'" uncheckable>Persian</label>
-
-					<label class="btn btn-default"
-						ng-model="toLang"
-						ng-change="toLangChanged()"
-						btn-radio="'ph'" uncheckable>Phonetic</label>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<button class="btn btn-primary" ng-click="bucket=1">
-				<span class="glyphicon glyphicon-share-alt"></span>&nbsp; Restart
-			</button>
 		</div>
 	</div>
 
