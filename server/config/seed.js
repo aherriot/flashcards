@@ -35,14 +35,14 @@ User.find({}).remove(function() {
 function createWords(test_user) {
   Word.find({}).remove(function() {
     Word.create(
-      {user_id: test_user._id, english: 'mint', persian: 'نعناع', phonetic: 'nanaa', tags: ['noun','food','herb']},
-      {user_id: test_user._id, english: 'apple', persian: 'سیب', phonetic: 'sib', tags: ['noun','food','fruit']},
-      {user_id: test_user._id, english: 'pear', persian: 'گلابی', phonetic: 'golaabi', tags: ['noun','food','fruit']},
-      {user_id: test_user._id, english: 'ice', persian: 'یخ', phonetic: 'yakh', tags: ['noun','food']},
-      {user_id: test_user._id, english: 'juice', persian: 'آبمیوه', phonetic: 'aabmive', tags: ['noun','food','drink']},
-      {user_id: test_user._id, english: 'beer', persian: 'آبجو', phonetic: 'aabjo', tags: ['noun','food','drink']},
-      {user_id: test_user._id, english: 'wine', persian: 'شراب', phonetic: 'sharaab', tags: ['noun','food','drink']},
-      {user_id: test_user._id, english: 'milk', persian: 'شیر', phonetic: 'shir', tags: ['noun','food','drink']}
+      {userID: test_user._id, english: 'mint', persian: 'نعناع', phonetic: 'nanaa', tags: ['noun','food','herb']},
+      {userID: test_user._id, english: 'apple', persian: 'سیب', phonetic: 'sib', tags: ['noun','food','fruit']},
+      {userID: test_user._id, english: 'pear', persian: 'گلابی', phonetic: 'golaabi', tags: ['noun','food','fruit']},
+      {userID: test_user._id, english: 'ice', persian: 'یخ', phonetic: 'yakh', tags: ['noun','food']},
+      {userID: test_user._id, english: 'juice', persian: 'آبمیوه', phonetic: 'aabmive', tags: ['noun','food','drink']},
+      {userID: test_user._id, english: 'beer', persian: 'آبجو', phonetic: 'aabjo', tags: ['noun','food','drink']},
+      {userID: test_user._id, english: 'wine', persian: 'شراب', phonetic: 'sharaab', tags: ['noun','food','drink']},
+      {userID: test_user._id, english: 'milk', persian: 'شیر', phonetic: 'shir', tags: ['noun','food','drink']}
     );
   });
 }

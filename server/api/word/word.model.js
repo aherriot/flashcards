@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var WordSchema = new Schema({
-  user_id: {
+  userID: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true

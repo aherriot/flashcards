@@ -15,11 +15,11 @@ function arrayUnique(array) {
     }
 
     return a;
-};
+}
 
 // Get list of words
 exports.index = function(req, res) {
-  Word.find({user_id: req.query.user_id},
+  Word.find({userID: req.query.userID},
     function (err, words) {
       if(err) { return handleError(res, err); }
       return res.json(200, words);

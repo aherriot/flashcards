@@ -22,15 +22,15 @@ angular.module('flashcardsApp')
     //between [english, persian, and phonetic persian]
     $scope.direction = function() {
       return $scope.fromLang + '_to_' + $scope.toLang;
-    }
+    };
 
     //The filtering string to filter our word list with
-    $scope.tagFilter = "";
+    $scope.tagFilter = '';
 
     //fetch the words from the server.
     //TODO: share scope or at least this data with Words controller.
-    $scope.words = Word.query({user_id: Auth.getCurrentUser()._id},
-      function(words) {
+    $scope.words = Word.query({userID: Auth.getCurrentUser()._id},
+      function() {
         selectWord();
     });
 
@@ -69,36 +69,16 @@ angular.module('flashcardsApp')
 
       var filteredWordList = [];
       while(true) {
+
         $scope.bucketCounts = [0,0,0,0,0];
-        filteredWordList = $filter('filter')($scope.words, function(word, index) {
-          //keep any words that are in the current bucket or smaller
-          var wordBucket = word[$scope.direction()];
 
-          $scope.bucketCounts[wordBucket-1]++;
-          //word is in too large of a bucket
-          if(wordBucket > $scope.bucket) {
-            return false;
-          }
+        filteredWordList = filterWordList();
 
-          //we aren't filtering the word list
-          if($scope.tagFilter.length === 0) {
-            return true;
-          }
-
-          //if the tag filter text is a substring of any of the tags.
-          for(var index in word.tags) {
-            if(word.tags[index].indexOf($scope.tagFilter) >= 0) {
-              return true;
-            }
-          }
-          //otherwise it is not to be displayed.
-          return false;
-        });
         var total = 0;
         for(var i = 0; i < 5; i++) {
           total += $scope.bucketCounts[i];
         }
-        for(var i = 0; i < 5; i++) {
+        for(i = 0; i < 5; i++) {
           $scope.bucketCounts[i] = ($scope.bucketCounts[i] / total) * 100;
         }
 
@@ -125,12 +105,46 @@ angular.module('flashcardsApp')
       $scope.answer = $scope.word[getPropertyName($scope.toLang)];
     }
 
-    $scope.fromLangChanged = function(value) {
+    function filterWordList() {
+      var filteredWordList = [];
+
+      for(var i = 0; i < $scope.words.length; i++) {
+        var word = $scope.words[i];
+        var wordBucket = word[$scope.direction()];
+
+        $scope.bucketCounts[wordBucket-1]++;
+        //word is in too large of a bucket
+        if(wordBucket > $scope.bucket) {
+          continue;
+        }
+
+        //we aren't filtering the word list
+        if($scope.tagFilter.length === 0) {
+          filteredWordList.push(word);
+          continue;
+        }
+
+        //if the tag filter text is a substring of any of the tags.
+        for(var tagIndex in word.tags) {
+          if(word.tags[tagIndex].indexOf($scope.tagFilter) >= 0) {
+            filteredWordList.push(word);
+            continue;
+          }
+        }
+        //otherwise, skip the word
+      }
+
+      return filteredWordList;
+
+    }
+
+    $scope.fromLangChanged = function() {
       if($scope.fromLang === $scope.toLang) {
-        if($scope.fromLang === 'p')
+        if($scope.fromLang === 'p') {
           $scope.toLang = 'e';
-        else
+        } else {
           $scope.toLang = 'p';
+        }
       }
 
       //if the question has not been answered yet, keep the same question.
@@ -142,13 +156,14 @@ angular.module('flashcardsApp')
 
     };
 
-    $scope.toLangChanged = function(value) {
+    $scope.toLangChanged = function() {
 
       if($scope.fromLang === $scope.toLang) {
-        if($scope.toLang === 'p')
+        if($scope.toLang === 'p') {
           $scope.fromLang = 'e';
-        else
+        } else {
           $scope.fromLang = 'p';
+        }
       }
 
       //if the question has not been answered yet, keep the same question.
@@ -167,24 +182,15 @@ angular.module('flashcardsApp')
     };
 
     function getPropertyName(abbrv) {
-      if (abbrv === 'e')
+      if (abbrv === 'e') {
         return 'english';
-
-      if (abbrv === 'p')
-        return 'persian'
-
-      return 'phonetic'
-    }
-
-
-    function getProgressString(bucket) {
-      switch(bucket) {
-        case 1: return 'least known';
-        case 2: return 'less known';
-        case 3: return 'somewhat known';
-        case 4: return 'well known';
-        case 5: return 'most well known';
       }
+
+      if (abbrv === 'p') {
+        return 'persian';
+      }
+
+      return 'phonetic';
     }
 
 
