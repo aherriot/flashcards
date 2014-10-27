@@ -17,6 +17,14 @@ $bucket5: #259b24;
 
 $hover-background: #ffff99;
 
+textarea {
+  white-space: nowrap;
+  overflow: auto;
+  width: 100%;
+  resize: none;
+
+}
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;

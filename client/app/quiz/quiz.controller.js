@@ -70,16 +70,15 @@ angular.module('flashcardsApp')
       var filteredWordList = [];
       while(true) {
 
-        $scope.bucketCounts = [0,0,0,0,0];
+
 
         filteredWordList = filterWordList();
 
-        var total = 0;
+        console.log($scope.bucketCounts);
+        console.log(filteredWordList.length)
+
         for(var i = 0; i < 5; i++) {
-          total += $scope.bucketCounts[i];
-        }
-        for(i = 0; i < 5; i++) {
-          $scope.bucketCounts[i] = ($scope.bucketCounts[i] / total) * 100;
+          $scope.bucketCounts[i] = ($scope.bucketCounts[i] / filteredWordList.length) * 100;
         }
 
         $scope.noWords = false;
@@ -106,6 +105,7 @@ angular.module('flashcardsApp')
     }
 
     function filterWordList() {
+      $scope.bucketCounts = [0,0,0,0,0];
       var filteredWordList = [];
 
       for(var i = 0; i < $scope.words.length; i++) {
@@ -113,6 +113,7 @@ angular.module('flashcardsApp')
         var wordBucket = word[$scope.direction()];
 
         $scope.bucketCounts[wordBucket-1]++;
+
         //word is in too large of a bucket
         if(wordBucket > $scope.bucket) {
           continue;
@@ -120,6 +121,7 @@ angular.module('flashcardsApp')
 
         //we aren't filtering the word list
         if($scope.tagFilter.length === 0) {
+
           filteredWordList.push(word);
           continue;
         }

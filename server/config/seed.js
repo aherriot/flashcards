@@ -42,7 +42,10 @@ function createWords(test_user) {
       {userID: test_user._id, english: 'juice', persian: 'آبمیوه', phonetic: 'aabmive', tags: ['noun','food','drink']},
       {userID: test_user._id, english: 'beer', persian: 'آبجو', phonetic: 'aabjo', tags: ['noun','food','drink']},
       {userID: test_user._id, english: 'wine', persian: 'شراب', phonetic: 'sharaab', tags: ['noun','food','drink']},
-      {userID: test_user._id, english: 'milk', persian: 'شیر', phonetic: 'shir', tags: ['noun','food','drink']}
+      {userID: test_user._id, english: 'milk', persian: 'شیر', phonetic: 'shir', tags: ['noun','food','drink']},
+      {userID: test_user._id, english: 'This cat is looking at the fish', persian: 'این گربه دارد به ماهی نگاه میکند', phonetic: 'in gorbe daarad be maahi negaah mikonad', tags: ['phrase']},
+      {userID: test_user._id, english: 'I do not like slimy food', persian: 'من غذای لیز دوست ندارم', phonetic: 'man ghazaaye liz doost nadaram', tags: ['phrase']},
+      {userID: test_user._id, english: 'This family is eating breakfast inside the home', persian: 'این خانواده دارند داخل خانه صبحانه می خورند', phonetic: 'in khaanevaade daarand daakhel khaane sobhaane mikhorand', tags: ['phrase']}
     );
   });
 }

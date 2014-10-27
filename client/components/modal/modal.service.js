@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('flashcardsApp')
-  .factory('Modal', function ($rootScope, $modal) {
+  .factory('Modal', function ($rootScope, $modal, $sce) {
     /**
      * Opens a modal
      * @param  {Object} scope      - an object to be merged with modal's scope
@@ -24,6 +24,24 @@ angular.module('flashcardsApp')
 
     // Public API here
     return {
+
+      exportData: function(text) {
+          var deleteModal = openModal({
+            modal: {
+              dismissable: true,
+              title: 'Exported Words',
+              html: '<strong>Please select and copy the data below:</strong>',
+              textarea: text,
+              buttons: [{
+                classes: 'btn-primary',
+                text: 'Okay',
+                click: function(e) {
+                  deleteModal.close(e);
+                }
+              }]
+            }
+          }, 'modal-primary');
+      },
 
       /* Confirmation modals */
       confirm: {
