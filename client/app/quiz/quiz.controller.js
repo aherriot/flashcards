@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('flashcardsApp')
-  .controller('QuizCtrl', ['$scope', '$filter', 'Word', 'Auth',
-    function ($scope, $filter, Word, Auth) {
+  .controller('QuizCtrl', ['$scope', '$location', '$filter', 'Word', 'Auth',
+    function ($scope, $location, $filter, Word, Auth) {
+
+    if(Auth.isLoggedIn() !== true) {
+      $location.path('/login');
+    }
 
     //The word currently being quized.
     $scope.word = null;
@@ -74,11 +78,12 @@ angular.module('flashcardsApp')
 
         filteredWordList = filterWordList();
 
-        console.log($scope.bucketCounts);
-        console.log(filteredWordList.length)
-
+        var total = 0;
         for(var i = 0; i < 5; i++) {
-          $scope.bucketCounts[i] = ($scope.bucketCounts[i] / filteredWordList.length) * 100;
+          total += $scope.bucketCounts[i];
+        }
+        for(i = 0; i < 5; i++) {
+          $scope.bucketCounts[i] = ($scope.bucketCounts[i] / total) * 100;
         }
 
         $scope.noWords = false;
@@ -112,16 +117,17 @@ angular.module('flashcardsApp')
         var word = $scope.words[i];
         var wordBucket = word[$scope.direction()];
 
-        $scope.bucketCounts[wordBucket-1]++;
+
 
         //word is in too large of a bucket
         if(wordBucket > $scope.bucket) {
+          $scope.bucketCounts[wordBucket-1]++;
           continue;
         }
 
         //we aren't filtering the word list
         if($scope.tagFilter.length === 0) {
-
+          $scope.bucketCounts[wordBucket-1]++;
           filteredWordList.push(word);
           continue;
         }
@@ -129,6 +135,7 @@ angular.module('flashcardsApp')
         //if the tag filter text is a substring of any of the tags.
         for(var tagIndex in word.tags) {
           if(word.tags[tagIndex].indexOf($scope.tagFilter) >= 0) {
+            $scope.bucketCounts[wordBucket-1]++;
             filteredWordList.push(word);
             continue;
           }

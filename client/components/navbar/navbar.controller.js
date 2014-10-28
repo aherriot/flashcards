@@ -2,16 +2,6 @@
 
 angular.module('flashcardsApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
-      'title': 'Words',
-      'link': '/words'
-    }, {
-      'title': 'Quiz',
-      'link': '/quiz'
-    }, {
-      'title': 'About',
-      'link': '/about'
-    }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;

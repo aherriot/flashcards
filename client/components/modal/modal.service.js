@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('flashcardsApp')
-  .factory('Modal', function ($rootScope, $modal, $sce) {
+  .factory('Modal', function ($rootScope, $modal) {
     /**
      * Opens a modal
      * @param  {Object} scope      - an object to be merged with modal's scope
