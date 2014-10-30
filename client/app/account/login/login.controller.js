@@ -2,6 +2,8 @@
 
 angular.module('flashcardsApp')
   .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+
+    $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.user = {};
     $scope.errors = {};
 
@@ -22,6 +24,11 @@ angular.module('flashcardsApp')
           $scope.errors.other = err.message;
         });
       }
+    };
+
+    $scope.logout = function() {
+      Auth.logout();
+      $location.path('/login');
     };
 
     $scope.loginOauth = function(provider) {

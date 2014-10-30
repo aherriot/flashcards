@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('flashcardsApp')
-  .controller('QuizCtrl', ['$scope', '$location', '$filter', 'Word', 'Auth',
-    function ($scope, $location, $filter, Word, Auth) {
+  .controller('QuizCtrl', ['$scope', '$location', 'Word', 'Auth',
+    function ($scope, $location, Word, Auth) {
 
     if(Auth.isLoggedIn() !== true) {
       $location.path('/login');

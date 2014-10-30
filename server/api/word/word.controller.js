@@ -54,7 +54,7 @@ exports.update = function(req, res) {
 
     //merge objects and remove duplicates in arrays
     var updated = _.merge(word, req.body, function(a,b) {
-      return _.isArray(a) ? arrayUnique(a.concat(b)) : undefined;
+      return _.isArray(a) ? b : undefined;
     });
 
     updated.save(function (err) {

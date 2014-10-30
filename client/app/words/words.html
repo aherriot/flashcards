@@ -24,7 +24,11 @@
           </ul>
         </div>
 
-        <input type="text" class="form-control" ng-model="filterText" placeholder="Search...">
+        <input type="text"
+          class="form-control"
+          ng-model="filterText"
+          ng-change="filterChanged()"
+          placeholder="Search...">
       </div>
     </div>
   </div>
@@ -48,9 +52,24 @@
 
   </div>
 
-  <div class="row table-row" ng-repeat="word in filteredWords  = (words | filter:filterText)">
+  <div class="row table-row" ng-repeat="word in paginatedWords">
     <inline-edit data="word"></inline-edit>
   </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <pagination boundary-links="true"
+        max-size="7"
+        items-per-page="itemsPerPage"
+        total-items="filteredWords.length"
+        ng-model="currentPage"
+        boundary-links="true"
+        rotate="false"
+
+        ng-change="pageChanged()"></pagination>
+    </div>
+  </div>
+
 
   <div class="row table-row" ng-show="filteredWords.length == 0 && filterText.length">
     <div class="text-center">

@@ -5,7 +5,9 @@
     <div class="col-sm-12">
       <h1>Login</h1>
     </div>
-    <div class="col-sm-12">
+
+
+    <div ng-hide="isLoggedIn()" class="col-sm-12">
       <form class="form" name="form" ng-submit="login(form)" novalidate>
 
         <div class="form-group">
@@ -55,6 +57,13 @@
         </div> -->
       </form>
     </div>
+    <div ng-show="isLoggedIn()" class="col-sm-12">
+      <p>
+        Please log out if you wish to log in as another user.
+      </p>
+      <a class="btn btn-primary" href="" ng-click="logout()">
+        Logout
+      </a>
+    </div>
   </div>
-  <hr>
 </div>
